@@ -64,7 +64,7 @@ class Help:
         self.dismiss_btn.grid(row=2, pady=10)
 
         #cross button
-        self.help_box.protocol
+        self.help_box.protocol('WM_DELETE_WINDOW', partial(self.close_help, partner))
 
     def close_help(self, partner):
         partner.help_button.config(state=NORMAL)
