@@ -20,16 +20,31 @@ class Converter:
                                           padx=10, pady=10)
         self.temp_converter_label.grid(row=0)
 
+
         # user instructions
         self.instructions = Label(self.converter_frame, text="type in temperature below then push one of the buttons",
-                                          font=("Arial", "6"),
+                                          font=("Arial", "10"), wrap=250,
                                           bg=background_colour,
                                           padx=10, pady=10)
         self.instructions.grid(row=1)
 
+        # entry box
+        self.to_convert_entry = Entry(self.converter_frame, width=20,font=("Arial", "14", "bold"))
+        self.to_convert_entry.grid(row=2)
 
+        # conversion buttons
+        self.conversion_buttons_frame = Frame(self.converter_frame)
+        self.conversion_buttons_frame.grid(row=3, pady=10)
 
+        self.to_c_button = Button(self.conversion_buttons_frame,
+                                  text="To Celsius", font=("Arial", "10"), bg="blue",
+                                  padx=10, pady=10)
+        self.to_c_button.grid(row=0, column=0)
 
+        self.to_f_button = Button(self.conversion_buttons_frame,
+                                  text="To Fahrenheit", font=("Arial", "10"), bg="red",
+                                  padx=10, pady=10)
+        self.to_f_button.grid(row=0, column=1)
 
 
 # main routine
