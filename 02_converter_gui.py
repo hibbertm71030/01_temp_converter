@@ -38,13 +38,61 @@ class Converter:
 
         self.to_c_button = Button(self.conversion_buttons_frame,
                                   text="To Celsius", font=("Arial", "10"), bg="blue",
-                                  padx=10, pady=10)
+                                  padx=10, pady=10,
+                                  command=lambda: self.temp_convert(-459))
         self.to_c_button.grid(row=0, column=0)
 
         self.to_f_button = Button(self.conversion_buttons_frame,
                                   text="To Fahrenheit", font=("Arial", "10"), bg="red",
-                                  padx=10, pady=10)
+                                  padx=10, pady=10,
+                                  command=lambda: self.temp_convert(-273))
         self.to_f_button.grid(row=0, column=1)
+
+        # History and help button frame (row 5)
+        self.hist_help_frame = Frame(self.converter_frame)
+        self.hist_help_frame.grid(row=5, pady=10)
+
+        self.calc_hist_button = Button(self.hist_help_frame, font=("Verdana", "10"),
+                                       text="Calculation History", width=15)
+        self.calc_hist_button.grid(row=0, column=0)
+
+        self.help_button = Button(self.hist_help_frame, font=("Verdana", "10"),
+                                  text="Help", width=5)
+        self.help_button.grid(row=0, column=1)
+
+        # Answer label
+        self.converted_label = Label(self.converter_frame,
+                                     font=("Verdana", "10"), fg="purple",
+                                     bg=background_colour, pady=10,
+                                     text="Conversion goes here")
+        self.converted_label.grid(row=4)
+
+    def temp_convert(self, to):
+        error_colour = "#ffafaf"
+        success_colour = "#4BB543"
+        # Retrieve amount entered into entry field.
+        to_convert = self.to_convert_entry.get()
+
+        # Check amount is a valid number.
+        try:
+            to_convert = float(to_convert)
+            self.to_convert_entry.configure(bg=success_colour)
+
+            # Check amount is a valid number
+
+            # Convert to F
+
+            # Convert to C
+
+            # Round
+
+            # Display answer
+
+            # Add answer to list for history
+
+        except ValueError:
+            self.converted_label.configure(text="please enter a number", fg="red")
+            self.to_convert_entry.configure(bg=error_colour)
 
 
 # main routine
