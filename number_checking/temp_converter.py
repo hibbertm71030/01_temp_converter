@@ -8,8 +8,11 @@ class Converter:
         # formatting variables
         background_colour = "light green"
 
+        # calculation history list
+        self.all_calculations = []
+
         # converter GUI
-        self.converter_frame = Frame(width=500, height=500, bg=background_colour,
+        self.converter_frame = Frame(bg=background_colour,
                                      pady=10)
         self.converter_frame.grid()
 
@@ -67,21 +70,23 @@ class Converter:
                                      text="Conversion goes here")
         self.converted_label.grid(row=4)
 
-    def temp_convert(self, to):
-        error_colour = "#ffafaf"
-        success_colour = "#4BB543"
+    def temp_convert(self, low):
+        print(low)
+
+        error = "#ffafaf"
+
         # Retrieve amount entered into entry field.
         to_convert = self.to_convert_entry.get()
 
         # Check amount is a valid number.
         try:
             to_convert = float(to_convert)
-            self.to_convert_entry.configure(bg=success_colour)
+            has_errors = "no"
 
             # Check amount is a valid number
 
             # Convert to F
-            if low == -273 and to convert >=low:
+            if low == -273 and to_convert >= low:
                 fahrenheit = (to_convert * 9/5) + 32
                 to_convert = self.round_it(to_convert)
                 fahrenheit = self.round_it(fahrenheit)
@@ -95,17 +100,42 @@ class Converter:
                 answer = "{} degrees C is {} degrees F".format(to_convert, celsius)
 
             else:
+                answer = "too cold"
+                has_errors = "yes"
 
 
-            # Round
-
-            # Display answer
+            # display answer
+            if has_errors == "no":
+                self.converted_label.configure(text=answer, fg="blue")
+                self.to_convert_entry.configure(bg="white")
+            else:
+                self.converted_label.configure(text=answer, fg="red")
+                self.to_convert_entry.configure(bg=error)
 
             # Add answer to list for history
+            if answer != "too cold":
+                self.all_calculations.append(answer)
+                print(self.all_calculations)
+
 
         except ValueError:
             self.converted_label.configure(text="please enter a number", fg="red")
-            self.to_convert_entry.configure(bg=error_colour)
+            self.to_convert_entry.configure(bg=error)
+
+
+
+
+
+    # Round
+    def round_it(self, to_round):
+        if to_round % 1 == 0:
+            rounded = int(to_round)
+        else:
+            rounded = round(to_round, 1)
+
+        return rounded
+
+
 
 
 # main routine
