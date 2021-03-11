@@ -8,7 +8,7 @@ class Converter:
         # formatting variables
         background_colour = "light green"
 
-        # calculation history list
+        # calculation history list (WILL BE BLANK in actual program)
         self.all_calculations = []
 
         # converter GUI
@@ -97,7 +97,7 @@ class Converter:
                 celsius = (to_convert - 32) * 5/9
                 to_convert = self.round_it(to_convert)
                 celsius = self.round_it(celsius)
-                answer = "{} degrees C is {} degrees F".format(to_convert, celsius)
+                answer = "{} degrees F is {} degrees C".format(to_convert, celsius)
 
             else:
                 answer = "too cold"
