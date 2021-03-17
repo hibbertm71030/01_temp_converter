@@ -2,6 +2,7 @@ from tkinter import *
 import random
 from functools import partial
 
+
 class Converter:
     def __init__(self, parent):
 
@@ -75,7 +76,6 @@ class History:
                 history_string += calc_history[len(calc_history) - calc_history.index(item) - 1] + "\n"
                 self.history_text.config(text="Here is your calculation history, "
                                               "you can save this data by pressing export.")
-
 
         # calc history label
         self.calc_label = Label(self.history_frame, text=history_string,
