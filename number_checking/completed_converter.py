@@ -2,6 +2,7 @@ from tkinter import *
 import random
 from functools import partial
 
+
 class Converter:
     def __init__(self, parent):
 
@@ -23,16 +24,15 @@ class Converter:
                                           padx=10, pady=10)
         self.temp_converter_label.grid(row=0)
 
-
         # user instructions
         self.instructions = Label(self.converter_frame, text="type in temperature below then push one of the buttons",
-                                          font=("Arial", "10"), wrap=250,
-                                          bg=background_colour,
-                                          padx=10, pady=10)
+                                  font=("Arial", "10"), wrap=250,
+                                  bg=background_colour,
+                                  padx=10, pady=10)
         self.instructions.grid(row=1)
 
         # entry box
-        self.to_convert_entry = Entry(self.converter_frame, width=20,font=("Arial", "14", "bold"))
+        self.to_convert_entry = Entry(self.converter_frame, width=20, font=("Arial", "14", "bold"))
         self.to_convert_entry.grid(row=2)
 
         # conversion buttons
@@ -107,7 +107,6 @@ class Converter:
                 answer = "too cold"
                 has_errors = "yes"
 
-
             # display answer
             if has_errors == "no":
                 self.converted_label.configure(text=answer, fg="blue")
@@ -120,7 +119,6 @@ class Converter:
             if answer != "yes":
                 self.all_calculations.append(answer)
                 self.history_button.config(state=NORMAL)
-
 
         except ValueError:
             self.converted_label.configure(text="please enter a number", fg="red")
@@ -156,21 +154,21 @@ class History:
 
         # history heading
         self.history_label = Label(self.history_frame, text="History/instructions",
-                                          font=("Arial", "13", "bold"),
-                                          bg=background,
-                                          padx=10, pady=10)
+                                   font=("Arial", "13", "bold"),
+                                   bg=background,
+                                   padx=10, pady=10)
         self.history_label.grid(row=0)
 
         # history text
         self.history_text = Label(self.history_frame, text="Here are your most recent calculations,"
                                                            " to save all your calculations press export.",
-                                 font="arial 10", justify=LEFT, width=40, bg=background, wrap=250)
+                                  font="arial 10", justify=LEFT, width=40, bg=background, wrap=250)
         self.history_text.grid(column=0, row=1)
 
         # generate string from calc list
         history_string = ""
 
-        if len(calc_history) >= 7:
+        if len(calc_history) > 7:
             for item in range(0, 7):
                 history_string += calc_history[len(calc_history) - item - 1]+"\n"
 
