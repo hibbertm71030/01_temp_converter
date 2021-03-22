@@ -1,6 +1,7 @@
 from tkinter import *
 import random
 from functools import partial
+import re
 
 
 class Converter:
@@ -87,7 +88,9 @@ class History:
         self.export_dismiss_frame.grid(row=3, pady=10)
 
         # export button
-        self.export_button = Button(self.export_dismiss_frame, text="export", font="Arial 10", bg=background)
+        self.export_button = Button(self.export_dismiss_frame, text="export",
+                                    font="Arial 10", bg=background,
+                                    command=lambda: self.export(calc_history))
         self.export_button.grid(row=0, column=0)
 
         # dismiss button
@@ -149,6 +152,10 @@ class Export:
                                     font="Arial 12", justify=CENTER)
         self.filename_entry.grid(row=3, pady=10)
 
+        # error message labels
+        self.save_error_label = Label(self.export_frame, text="", fg="maroon", bg=background)
+        self.save_error_label.grid(row=4)
+
         # save/cancel button
         self.save_cancel_frame = Frame(self.export_frame)
         self.save_cancel_frame.grid(row=5, pady=10)
@@ -162,9 +169,71 @@ class Export:
                                     command=partial(self.close_export, partner))
         self.cancel_button.grid(row=0, column=1)
 
-        def save_history(self, partner, calc_history)
+        def save_history(self, partner, calc_history):
 
-        #cross button
+            # regular expression to check filename is valid
+            valid_char = "[A-Za-z0-9_]"
+            has_error = "no"
+
+            filename = self.filename_entry.get()
+            print(filename)
+
+            for letter in filename:
+                if re.match(valid_char, letter):
+                    continue
+
+                elif letter == " ":
+                    problem = "(no spaces allowed)"
+
+                else:
+                    problem = ("(no {}'s allowed)".format(letter))
+                    has_error = "yes"
+                    break
+
+            if filename == "":
+                problem = "can't be blank"
+                has_error = "yes"
+
+            if has_error == "yes":
+                # display error
+                self.save_error_label.config(text="invalis filename - {}".format(problem))
+                # change entry box colour
+                self.filename_entry.config(bg="#ffafaf")
+                print()
+
+            else:
+                # if there are no errors, generate text file and then close
+                filename = filename + ".txt"
+
+                # create file
+                f = open(filename, "w+")
+
+                # add new line at end of each item
+                for item in calc_history:
+                    f.write(item + "\n")
+
+                # close file
+                f.close()
+
+                # close dialouge
+                self.close_export(partner)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # cross button
         self.export_box.protocol('WM_DELETE_WINDOW', partial(self.close_export, partner))
 
     def close_export(self, partner):

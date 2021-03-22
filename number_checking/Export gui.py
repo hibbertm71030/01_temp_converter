@@ -37,6 +37,9 @@ class Export:
         # disable export button
         partner.export_button.config(state=DISABLED)
 
+        # cross button
+        self.export_box.protocol('WM_DELETE_WINDOW', partial(self.close_export, partner))
+
         # sets up little export window
         self.export_box = Toplevel()
 
@@ -82,8 +85,7 @@ class Export:
                                     command=partial(self.close_export, partner))
         self.cancel_button.grid(row=0, column=1)
 
-        #cross button
-        self.export_box.protocol('WM_DELETE_WINDOW', partial(self.close_export, partner))
+
 
     def close_export(self, partner):
         partner.export_button.config(state=NORMAL)
