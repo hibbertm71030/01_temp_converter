@@ -1,0 +1,4 @@
+Temperature Conversion History
+
+12 degrees F is -11.1 degrees C
+19 degrees C is 66.2 degrees F

@@ -1,0 +1,3 @@
+12 degrees F is -11.1 degrees C
+17 degrees F is -8.3 degrees C
+19 degrees F is -7.2 degrees C
